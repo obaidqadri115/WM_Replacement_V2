@@ -1,0 +1,26 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.acc.ZWM_V2.controller.Master"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Work Manager">
+		<content>
+			<List mode="None" width="100%" headerText="" footerText="" backgroundDesign="Translucent" showSeparators="All" growing="true"
+				growingThreshold="20" growingScrollToLoad="true" visible="true" selectionChange="onListItemSelectionChange"
+				items="{path:'TypesSet>/', templateShareable:true}" updateFinished="onListUpdateFinsh">
+				<infoToolbar/>
+				<headerToolbar/>
+				<items>
+					<ObjectListItem icon="{TypesSet>icon}" title="{TypesSet>Type}" number="" numberUnit="" numberState="None" type="Active" selected="false"
+						press="onListItemPress">
+						<attributes/>
+						<firstStatus/>
+						<secondStatus/>
+					</ObjectListItem>
+				</items>
+			</List>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

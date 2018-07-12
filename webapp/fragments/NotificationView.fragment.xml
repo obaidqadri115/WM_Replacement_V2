@@ -1,0 +1,16 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="2" labelSpanS="12"
+		adjustLabelSpan="true" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="1"
+		singleContainerFullSize="false">
+		<f:content>
+			<Label design="Bold" text="Notification"/>
+			<Text text="{WODetModel>/Qmnum}"/>
+			<Label design="Bold" text="Type" wrapping="true"/>
+			<Text text="{WODetModel>/Qmtxt}"/>
+			<Label design="Bold" text="FuncLoc" wrapping="true"/>
+			<Text text="{WODetModel>/TplnrQmDesc}"/>
+			<Label design="Bold" text="Equipment" wrapping="true"/>
+			<Text text="{WODetModel>/EqunrQmDesc}"/>
+		</f:content>
+	</f:SimpleForm>
+</core:FragmentDefinition>

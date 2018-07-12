@@ -1,0 +1,48 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" class="sapUiSizeCompact">
+	<Dialog title="Component-{ComponentDetailModel>/Matnr}" contentHeight="450px" contentWidth="1200px">
+		<content>
+			<f:SimpleForm id="componentsSFId" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4"
+				labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3"
+				columnsL="2" columnsM="2" singleContainerFullSize="false">
+				<f:content>
+				<Label design="Bold" text="Material Desc."/>
+					<Text text="{ComponentDetailModel>/Maktx}"/>
+					<!--<Label design="Bold" text="Description"/>-->
+					<!--<Text text="{ComponentDetailModel>/Maktx}" />-->
+					<!--<Text text="{ComponentDetailModel>/Ltxa1}" />-->
+					<Label design="Bold" text="Item" wrapping="true"/>
+					<Text text="{ComponentDetailModel>/Posnr}" />
+					<Label design="Bold" text="Operation" wrapping="true"/>
+					<Text text="{ComponentDetailModel>/Rspos}" />
+					<Label design="Bold" text="Stock Type" wrapping="true"/>
+					<Text text="{ComponentDetailModel>/Postp}-{ComponentDetailModel>/Ptext}" />
+					<Label design="Bold" text="Required Quantity" wrapping="true"/>
+					<Text text="{ComponentDetailModel>/Bdmng}" />
+					<Label design="Bold" text="Plant" wrapping="true"/>
+					<Text text="{ComponentDetailModel>/Werks}" />
+					<Label design="Bold" text="Location" wrapping="true"/>
+					<Text text="{ComponentDetailModel>/Lgort}" />
+						<core:Title text="" />
+					<Label design="Bold" text="Batch"/>
+					<Text text="{ComponentDetailModel>/Charg}" />
+					<Label design="Bold" text="BinNum" wrapping="true"/>
+					<Text text="{ComponentDetailModel>/Lgpla}" />
+					<Label design="Bold" text="Committed Quantity"/>
+					<Text text="{ComponentDetailModel>/Vmeng}" />
+					<Label design="Bold" text="Withdraw Quantity" wrapping="true"/>
+					<Text text="{ComponentDetailModel>/Enmng}" />
+					<Label design="Bold" text="Reservation"/>
+					<Text text="{ComponentDetailModel>/Rsnum}" />
+					<Label design="Bold" text="Reservationv Item" wrapping="true"/>
+					<Text text="{ComponentDetailModel>/Rspos}" />
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<!--<beginButton>
+			<Button text="Edit" type="Accept" press="onCompEdit"></Button>
+		</beginButton>-->
+		<endButton>
+			<Button text="Close" press="onCloseCompDialog"></Button>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

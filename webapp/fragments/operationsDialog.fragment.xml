@@ -1,0 +1,67 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	class="sapUiSizeCompact">
+	<Dialog showHeader="false" contentHeight="450px" contentWidth="600px">
+		<content>
+			<Page >
+				<customHeader>
+					<Bar>
+						<contentMiddle>
+							<Label design="Bold" text="Operation - {operationDetailModel>/Vornr}"/>
+						</contentMiddle>
+						<contentRight>
+							<Button type="Reject" icon="sap-icon://sys-cancel-2" press="onCloseOperationsDialog"/>
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<content>
+					<f:SimpleForm id="operationsSFId" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+						labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+						singleContainerFullSize="true">
+						<f:content>
+							<Label design="Bold" text="Description"/>
+							<Text text="{operationDetailModel>/Ltxa1}"/>
+							<Label design="Bold" text="Work Center" wrapping="true"/>
+							<Text text="{operationDetailModel>/Arbpl}"/>
+							<Label design="Bold" text="Wrk Ctr Plant" wrapping="true"/>
+							<Text text="{operationDetailModel>/VWerks}"/>
+							<Label design="Bold" text="Control Key" wrapping="true"/>
+							<Text text="{operationDetailModel>/Steus}"/>
+							<Label design="Bold" text="Sort Key" wrapping="true"/>
+							<Text text="{operationDetailModel>/SortKey}"/>
+							<Label design="Bold" text="Status" wrapping="true"/>
+							<Text text="{operationDetailModel>/Status}"/>
+							<Label design="Bold" text="Notes"/>
+							<VBox>
+								<items>
+									<TextArea id="operationsNotesId" value="{operationsNotesData>/notes}" width="100%" enabled="{operationsNotesData>/enable}"/>
+									<HBox>
+										<Button icon="sap-icon://edit" type="Emphasized" visible="{operationsNotesData>/editBtn}" text="Edit" press="onOperationsEditPress"
+											class="sapUiSmallMarginEnd"/>
+										<Button type="Accept" visible="{operationsNotesData>/btnVisibility}" text="Save" press="onSaveOperationsNotes" class="sapUiSmallMarginEnd"/>
+										<Button type="Reject" visible="{operationsNotesData>/btnVisibility}" text="Cancel" press="onCancelOperationsNotes"/>
+									</HBox>
+								</items>
+							</VBox>
+						</f:content>
+					</f:SimpleForm>
+				</content>
+				<footer>
+					<Bar>
+						<contentLeft>
+							<Button icon="sap-icon://begin" press="onPress" enabled="false" type="Accept" ariaLabelledBy="beginButtonLabel"/>
+						</contentLeft>
+						<contentMiddle>
+							<Button icon="sap-icon://pause" press="onPress" enabled="false" type="Reject" ariaLabelledBy="pauseButtonLabel"/>
+						</contentMiddle>
+						<contentRight>
+							<Button icon="sap-icon://accept" press="onPress" enabled="false" type="Emphasized" ariaLabelledBy="acceptButtonLabel"/>
+						</contentRight>
+					</Bar>
+					<!--<Toolbar>
+				<ToolbarSpacer/>
+			</Toolbar>-->
+				</footer>
+			</Page>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

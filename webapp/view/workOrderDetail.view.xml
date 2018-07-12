@@ -1,0 +1,85 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.acc.ZWM_V2.controller.workOrderDetail"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Work Order - {WODetModel>/Aufnr}" showNavButton="{device>/isPhone}" navButtonPress="onBacktoWOMaster">
+		<content>
+			<IconTabBar id="iconTabBarId" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter text="Detail" key="detailTab">
+						<content>
+							<core:Fragment fragmentName="com.acc.ZWM_V2.fragments.DetailTab" type="XML"/>
+						</content>
+					</IconTabFilter>
+					<IconTabFilter text="Notification">
+						<content>
+							<core:Fragment fragmentName="com.acc.ZWM_V2.fragments.NotificationView" type="XML"/>
+						</content>
+					</IconTabFilter>
+					<IconTabFilter text="Operations">
+						<content>
+							<List id="operationsListId" items="{WODetModel>/NVHEADERTOOPERATIONS/results}" itemPress="onOperationsListItemPress">
+								<items>
+									<ObjectListItem title="{WODetModel>Ltxa1}" type="Active" number="{WODetModel>Vornr}" numberUnit="">
+										<firstStatus>
+											<ObjectStatus text="{WODetModel>Arbpl}" state="None"/>
+										</firstStatus>
+										<attributes>
+											<ObjectAttribute title="Start"
+												text="{parts:[{path:'WODetModel>Fsavd'},{path:'WODetModel>Fsavz'}],formatter : '.dateFormatter'}"/>
+											<ObjectAttribute title="Finish"
+												text="{parts:[{path:'WODetModel>Fsedd'},{path:'WODetModel>Fsedz'}],formatter : '.dateFormatter'}"/>
+										</attributes>
+									</ObjectListItem>
+								</items>
+							</List>
+						</content>
+					</IconTabFilter>
+					<IconTabFilter text="Components">
+						<content>
+							<List id="componentListId" items="{WODetModel>/NVHEADERTOCOMPONENTS/results}" itemPress="onComponentListItemPress">
+								<items>
+									<ObjectListItem title="{WODetModel>Maktx}" type="Active" intro="{WODetModel>Ltxa1}" number="{WODetModel>Posnr}" numberUnit="">
+										<firstStatus></firstStatus>
+										<attributes>
+											<ObjectAttribute title="Requirement Quantity" text="{WODetModel>Bdmng}"/>
+											<ObjectAttribute title="Withdrawal Quantity" text="{WODetModel>Enmng}"/>
+										</attributes>
+									</ObjectListItem>
+								</items>
+							</List>
+						</content>
+					</IconTabFilter>
+					<IconTabFilter text="Objects">
+						<content>
+							<List id="objectsListId" items="{WODetModel>/NVHEADERTOOBJECTS/results}">
+								<items>
+									<ObjectListItem title="Object {WODetModel>SermatGuid}" number="" numberUnit="">
+										<firstStatus>
+											<ObjectStatus text="Desc {WODetModel>Equidescr}" state="None"/>
+											<ObjectStatus text="FLOC {WODetModel>FunctLoc}" state="None"/>
+										</firstStatus>
+										<attributes>
+											<ObjectAttribute title="Equipment" text="{WODetModel>Equipment}"/>
+										</attributes>
+									</ObjectListItem>
+								</items>
+							</List>
+						</content>
+					</IconTabFilter>
+					<IconTabFilter text="Attachments"></IconTabFilter>
+					<IconTabFilter text="Maps">
+						<content height="100%">
+								<core:HTML id="mapsId" content=''>
+									
+								</core:HTML>
+						</content>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

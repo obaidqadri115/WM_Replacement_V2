@@ -1,0 +1,34 @@
+{
+  "welcomeFile": "/webapp/index.html",
+  "routes": [
+    {
+      "path": "/resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/resources",
+        "version": "1.52.17"
+      },
+      "description": "SAPUI5 Resources"
+    },
+    {
+      "path": "/test-resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/test-resources",
+        "version": "1.52.17"
+      },
+      "description": "SAPUI5 Test Resources"
+    },{
+      "path": "/sap/opu/odata",
+      "target": {
+        "type": "destination",
+        "name": "K4U-100",
+        "entryPath": "/sap/opu/odata"
+      },
+      "description": "K4U-100"
+    }
+  ],
+  "sendWelcomeFileRedirect": true
+}

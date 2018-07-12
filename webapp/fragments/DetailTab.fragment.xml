@@ -1,0 +1,33 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<f:SimpleForm id="componentsSFId" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="2"
+		labelSpanS="12" adjustLabelSpan="true" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="1"
+		singleContainerFullSize="false">
+		<f:content>
+			<Label design="Bold" text="Description"/>
+			<Text text="{WODetModel>/Ktext}"/>
+			<Label design="Bold" text="Planning Unit" wrapping="true"/>
+			<Text text="{WODetModel>/IwerkDesc}"/>
+			<Label design="Bold" text="Business Area" wrapping="true"/>
+			<Text text="{WODetModel>/GsberDesc}"/>
+			<Label design="Bold" text="Work Center" wrapping="true"/>
+			<Text text="{WODetModel>/ArbplDesc}"/>
+			<Label design="Bold" text="Work Center Plant" wrapping="true"/>
+			<Text text="{WODetModel>/WawrkDesc}"/>
+			<Label design="Bold" text="Functional Location" wrapping="true"/>
+			<Text text="{WODetModel>/TplnrDesc}"/>
+			<Label design="Bold" text="Equipment" wrapping="true"/>
+			<Text text="{WODetModel>/EqunrQmDesc}"/>
+			<Label design="Bold" text="Notes"/>
+			<VBox>
+				<items>
+					<TextArea id="detailNotesId" value="{detailNotesData>/notes}" width="100%" enabled="{detailEditNoteModel>/enable}"/>
+					<HBox>
+						<Button icon="sap-icon://edit" type="Emphasized" visible="{detailEditNoteModel>/editBtn}" text="Edit" press="onDetailEditPress" class="sapUiSmallMarginEnd"/>
+						<Button type="Accept" visible="{detailEditNoteModel>/btnVisibility}" text="Save" press="onSaveDetailNotes" class="sapUiSmallMarginEnd"/>
+						<Button type="Reject" visible="{detailEditNoteModel>/btnVisibility}" text="Cancel" press="onCancelDetailNotes"/>
+					</HBox>
+				</items>
+			</VBox>
+		</f:content>
+	</f:SimpleForm>
+</core:FragmentDefinition>

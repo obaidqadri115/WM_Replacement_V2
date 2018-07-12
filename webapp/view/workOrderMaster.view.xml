@@ -1,0 +1,34 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.acc.ZWM_V2.controller.workOrderMaster"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Work Order(s)" showNavButton="true" navButtonPress="onBacktoMaster">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="woSearchId" type="number" showRefreshButton="false" placeholder="{i18n>searchPlaceholder}"
+					liveChange="onSearchByWorkOrder" width="100%"></SearchField>
+				<ToolbarSpacer/>
+				<Button text="" press="onFilterBtnPress" tooltip="{i18n>filterBtnTooltip}" type="None" icon="sap-icon://filter"/>
+			</Toolbar>
+		</subHeader>
+		<content>
+			<List backgroundDesign="Translucent" showSeparators="All" items="{path:'workOrders>/', templateShareable:true}" mode="SingleSelectMaster"
+				itemPress="onListItemPress" updateFinished="onUpdateFinish">
+				<items>
+					<ObjectListItem title="{workOrders>Aufnr}" type="Active">
+						<firstStatus>
+							<ObjectStatus text="{workOrders>Auart}" state="None"/>
+						</firstStatus>
+						<attributes>
+							<ObjectAttribute title="Due" text="{parts:[{path:'workOrders>Date'}],formatter : '.dateFormatter'}"/>
+							<ObjectAttribute title="Priority" text="{parts:[{path:'workOrders>PriokDesc'}],formatter : '.piority'}"/>
+						</attributes>
+					</ObjectListItem>
+				</items>
+			</List>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>
