@@ -25,7 +25,7 @@ sap.ui.define([
 			}
 			var index = event.mParameters.arguments.context;
 			var woNum = this.MasterRef.getView().getModel("workOrders").getData()[index].Aufnr;
-			var url = "http://10.35.20.185:8080/geoeam-au/index.html?id="+woNum+"&output=embed";
+			var url = "https://10.35.20.185:8080/geoeam-au/index.html?id="+woNum+"&locale=en";
 			//var url = "https://hved.utl.accenture.com/geowm/index.html";
 			var frame = "<div><iframe src=" + url + " width='100%' height='550px'></iframe></div>";
 			this.byId("mapsId").setContent(frame);
