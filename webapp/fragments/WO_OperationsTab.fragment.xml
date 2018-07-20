@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<List items="{WODetModel>/NVHEADERTOOPERATIONS/results}" itemPress="onOperationsListItemPress">
+		<items>
+			<ObjectListItem title="{WODetModel>Ltxa1}" type="Active" number="{WODetModel>Vornr}" numberUnit="">
+				<firstStatus>
+					<ObjectStatus text="{WODetModel>Arbpl}" state="None"/>
+				</firstStatus>
+				<attributes>
+					<ObjectAttribute title="Start" text="{parts:[{path:'WODetModel>Fsavd'},{path:'WODetModel>Fsavz'}],formatter : '.dateFormatter'}"/>
+					<ObjectAttribute title="Finish" text="{parts:[{path:'WODetModel>Fsedd'},{path:'WODetModel>Fsedz'}],formatter : '.dateFormatter'}"/>
+				</attributes>
+			</ObjectListItem>
+		</items>
+	</List>
+</core:FragmentDefinition>

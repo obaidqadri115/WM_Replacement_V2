@@ -54,7 +54,7 @@
 							<Button icon="sap-icon://pause" press="onPress" enabled="false" type="Reject" ariaLabelledBy="pauseButtonLabel"/>
 						</contentMiddle>
 						<contentRight>
-							<Button icon="sap-icon://accept" press="onPress" enabled="false" type="Emphasized" ariaLabelledBy="acceptButtonLabel"/>
+							<Button icon="sap-icon://accept" press="onOperationFinish" enabled="true" type="Emphasized" ariaLabelledBy="acceptButtonLabel"/>
 						</contentRight>
 					</Bar>
 					<!--<Toolbar>

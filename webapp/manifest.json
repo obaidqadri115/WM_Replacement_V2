@@ -19,7 +19,7 @@
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
-					"localUri": ""
+					"localUri": "/sap/opu/odata/SAP/ZEAM_066_WM_FIORI_APP_SRV"
 				}
 			}
 		}
@@ -39,10 +39,7 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": [
-			"sap_hcb",
-			"sap_bluecrystal"
-		]
+		"supportedThemes": ["sap_hcb", "sap_bluecrystal"]
 	},
 	"sap.ui5": {
 		"rootView": {
@@ -74,11 +71,9 @@
 			}
 		},
 		"resources": {
-			"css": [
-				{
-					"uri": "css/style.css"
-				}
-			]
+			"css": [{
+				"uri": "css/style.css"
+			}]
 		},
 		"routing": {
 			"config": {
@@ -90,55 +85,30 @@
 				"controlAggregation": "detailPages",
 				"async": true,
 				"bypassed": {
-					"target": [
-						"MessagePage",
-						"Master"
-					]
+					"target": ["MessagePage", "Master"]
 				}
 			},
-			"routes": [
-				{
-					"pattern": "Master",
-					"name": "Master",
-					"target": [
-						"MessagePage",
-						"Master"
-					]
-				},
-				{
-					"pattern": "MessagePage",
-					"name": "MessagePage",
-					"target": [
-						"Master",
-						"MessagePage"
-					]
-				},
-				{
-					"pattern": "workOrderMaster",
-					"name": "workOrderMaster",
-					"target": [
-						"MessagePage",
-						"workOrderDetail",
-						"workOrderMaster"
-					]
-				},
-				{
-					"pattern": "workOrderDetail/{context}",
-					"name": "workOrderDetail",
-					"target": [
-						"workOrderMaster",
-						"workOrderDetail"
-					]
-				},
-				{
-					"pattern": "",
-					"name": "default",
-					"target": [
-						"MessagePage",
-						"Master"
-					]
-				}
-			],
+			"routes": [{
+				"pattern": "Master",
+				"name": "Master",
+				"target": ["MessagePage", "Master"]
+			}, {
+				"pattern": "MessagePage",
+				"name": "MessagePage",
+				"target": ["Master", "MessagePage"]
+			}, {
+				"pattern": "workOrderMaster",
+				"name": "workOrderMaster",
+				"target": ["MessagePage", "workOrderDetail", "workOrderMaster"]
+			}, {
+				"pattern": "workOrderDetail/{context}",
+				"name": "workOrderDetail",
+				"target": ["workOrderMaster", "workOrderDetail"]
+			}, {
+				"pattern": "",
+				"name": "default",
+				"target": ["MessagePage", "Master"]
+			}],
 			"targets": {
 				"Master": {
 					"controlAggregation": "masterPages",

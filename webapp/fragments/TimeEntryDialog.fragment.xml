@@ -1,0 +1,47 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	class="sapUiSizeCompact">
+	<Dialog showHeader="false" contentHeight="450px" contentWidth="600px">
+		<content>
+			<Page title="Add Time">
+				<!--	<customHeader>
+					<Bar>
+						<contentMiddle>
+							<Label design="Bold" text="Operation - {timeEntryModel>/Vornr}"/>
+						</contentMiddle>
+						<contentRight>
+							<Button type="Reject" icon="sap-icon://sys-cancel-2" press="onCloseOperationsDialog"/>
+						</contentRight>
+					</Bar>
+				</customHeader>-->
+				<content>
+					<f:SimpleForm editable="true" id="timeEntryFId" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+						adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+						singleContainerFullSize="true">
+						<f:content>
+							<Label design="Bold" text="Hours"/>
+							<TimePicker valueFormat="HH:mm" displayFormat="HH:mm" change="handleChange" minutesStep="15" placeholder="Select the no. of hours worked"/>
+							<Label design="Bold" text="Abs/Att Type" wrapping="true"/>
+							<Input showSuggestion="true" valueHelpOnly="true" showValueHelp="true" valueHelpRequest="handleValueHelp"></Input>
+							<Label design="Bold" text="Activity Type" wrapping="true"/>
+							<Input showSuggestion="true" valueHelpOnly="true" showValueHelp="true" valueHelpRequest="handleValueHelp"></Input>
+							<Label design="Bold" text="Work Order" wrapping="true"/>
+							<Text text="{timeEntryModel>/Aufnr}"/>
+							<Label design="Bold" text="Operation" wrapping="true"/>
+							<Text text="{timeEntryModel>/Vornr}"/>
+							<Label design="Bold" text="Sub Operation" wrapping="true"/>
+							<Text text="{timeEntryModel>/Status}"/>
+							<Label design="Bold" text="Work Center"/>
+							<Text text="{timeEntryModel>/Arbpl}"/>
+						</f:content>
+					</f:SimpleForm>
+				</content>
+			</Page>
+		</content>
+		<beginButton>
+			<Button  press="onTimeEntrySave" text="Save" enabled="true" type="Accept" ariaLabelledBy="acceptButtonLabel"/>
+		</beginButton>
+		<endButton>
+			<Button  press="onTimeEntryCancel" text="Close" enabled="true" type="Reject" ariaLabelledBy="acceptButtonLabel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

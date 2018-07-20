@@ -1,22 +1,23 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.acc.ZWM_V2.controller.workOrderDetail"
-	xmlns:html="http://www.w3.org/1999/xhtml">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:u="sap.ui.unified"
+	controllerName="com.acc.ZWM_V2.controller.workOrderDetail" xmlns:html="http://www.w3.org/1999/xhtml">
 	<Page title="Work Order - {WODetModel>/Aufnr}" showNavButton="{device>/isPhone}" navButtonPress="onBacktoWOMaster">
 		<content>
-			<IconTabBar id="iconTabBarId" class="sapUiResponsiveContentPadding">
+			<IconTabBar id="iconTabBarId" class="sapUiResponsiveContentPadding" select="onIconTabBarSelect">
 				<items>
 					<IconTabFilter text="Detail" key="detailTab">
 						<content>
-							<core:Fragment fragmentName="com.acc.ZWM_V2.fragments.DetailTab" type="XML"/>
+							<core:Fragment fragmentName="com.acc.ZWM_V2.fragments.WO_DetailTab" type="XML"/>
 						</content>
 					</IconTabFilter>
 					<IconTabFilter text="Notification">
 						<content>
-							<core:Fragment fragmentName="com.acc.ZWM_V2.fragments.NotificationView" type="XML"/>
+							<core:Fragment fragmentName="com.acc.ZWM_V2.fragments.WO_NotificationTab" type="XML"/>
 						</content>
 					</IconTabFilter>
 					<IconTabFilter text="Operations">
 						<content>
-							<List id="operationsListId" items="{WODetModel>/NVHEADERTOOPERATIONS/results}" itemPress="onOperationsListItemPress">
+							<core:Fragment fragmentName="com.acc.ZWM_V2.fragments.WO_OperationsTab" type="XML"/>
+							<!--	<List id="operationsListId" items="{WODetModel>/NVHEADERTOOPERATIONS/results}" itemPress="onOperationsListItemPress">
 								<items>
 									<ObjectListItem title="{WODetModel>Ltxa1}" type="Active" number="{WODetModel>Vornr}" numberUnit="">
 										<firstStatus>
@@ -30,7 +31,7 @@
 										</attributes>
 									</ObjectListItem>
 								</items>
-							</List>
+							</List>-->
 						</content>
 					</IconTabFilter>
 					<IconTabFilter text="Components">
@@ -65,12 +66,44 @@
 							</List>
 						</content>
 					</IconTabFilter>
-					<IconTabFilter text="Attachments"></IconTabFilter>
+					<IconTabFilter text="Attachments" key="documents">
+						<Table items="{WODetModel>/NVHEADERTOATTACHMENTS/results}" inset="false" noDataText="">
+							<headerToolbar>
+								<Toolbar>
+									<ToolbarSpacer/>
+									<u:FileUploader id="fileUploader" sameFilenameAllowed="true" buttonOnly="true" icon="sap-icon://add" iconOnly="true"
+									tooltip="Browse File " change="onFileUpload"/>
+									<Button icon="sap-icon://camera" tooltip="Upload File using Camera" press="onFileUploadByCamera"/>
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column width="auto" minScreenWidth="Phone" demandPopin="true" hAlign="Left">
+									<ObjectIdentifier title="Name"/>
+								</Column>
+								<Column width="auto" minScreenWidth="Desktop" demandPopin="true" hAlign="Left" popinDisplay="Inline">
+									<ObjectIdentifier title="Type"/>
+								</Column>
+								<Column width="auto" minScreenWidth="Desktop" demandPopin="true" hAlign="Right" popinDisplay="Inline">
+									<ObjectIdentifier title="Size"/>
+								</Column>
+								<Column width="auto" minScreenWidth="Phone" demandPopin="true" hAlign="Center" popinDisplay="Inline"></Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{WODetModel>name}"/>
+										<Text text="{WODetModel>type}"/>
+										<Text text="{path:'WODetModel>size', type: 'sap.ui.model.type.FileSize',formatOptions: { minFractionDigits: 2 }}"/>
+										<Button icon="sap-icon://delete" tooltip="Delete File" type="Reject" visible="{parts:[{path:'WODetModel>local'}],formatter :'.formatter.documentDeleteBtn'}"
+											press="onDecumentDelete"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
 					<IconTabFilter text="Maps">
 						<content height="100%">
-								<core:HTML id="mapsId" content=''>
-									
-								</core:HTML>
+							<core:HTML id="mapsId" content=''></core:HTML>
 						</content>
 					</IconTabFilter>
 				</items>
@@ -79,6 +112,7 @@
 		<footer>
 			<Toolbar>
 				<ToolbarSpacer/>
+				<Button text="Submit" type="Accept" tooltip="Submit Documents" id="docSubBtnId" press="onSubmitDocuments"></Button>
 			</Toolbar>
 		</footer>
 	</Page>

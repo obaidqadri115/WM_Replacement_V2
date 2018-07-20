@@ -17,7 +17,7 @@ sap.ui.define([
 			var path = "/HeaderSet";
 			var params = {
 				$filter: "Userid eq '11153519'",
-				$expand: "NVHEADERTOOPERATIONS,NVHEADERTOCOMPONENTS,NVHEADERTOOBJECTS"
+				$expand: "NVHEADERTOOPERATIONS,NVHEADERTOCOMPONENTS,NVHEADERTOOBJECTS,NVHEADERTOWOMAP,NVHEADERTOATTACHMENTS"
 			};
 			this.oModel.read(path, {
 				urlParameters: params,
@@ -26,6 +26,7 @@ sap.ui.define([
 					//that.getOwnerComponent().bDialog.close();
 				},
 				error: function (error) {
+					that.getView().setModel(new JSONModel([]), "workOrders");
 					that.getOwnerComponent().bDialog.close();
 				}
 			});
@@ -37,10 +38,13 @@ sap.ui.define([
 				oList.setSelectedItem(oFirstListItem);
 				oList.fireItemPress({
 					listItem: oFirstListItem,
-					srcControl:oFirstListItem
+					srcControl: oFirstListItem
 				});
 				this.getOwnerComponent().bDialog.close();
-			}else{
+			} else {
+				if (sap.ui.Device.system.desktop) {
+					this.getRouter().navTo("MessagePage", {});
+				}
 				this.getOwnerComponent().bDialog.close();
 			}
 
@@ -48,7 +52,7 @@ sap.ui.define([
 		onListItemPress: function (oEvent) {
 			var path = oEvent.mParameters.listItem.getBindingContextPath("workOrders");
 			this.getRouter().navTo("workOrderDetail", {
-				context:path.split("/")[1]
+				context: path.split("/")[1]
 			});
 		},
 		dateFormatter: function (value1) {

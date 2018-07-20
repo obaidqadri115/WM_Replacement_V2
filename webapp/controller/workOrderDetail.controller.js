@@ -1,9 +1,11 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller", "sap/ui/model/json/JSONModel", "com/acc/ZWM_V2/model/models", "sap/m/MessageBox"
-], function (Controller, JSONModel, models, MessageBox) {
+	"sap/ui/core/mvc/Controller", "sap/ui/model/json/JSONModel", "com/acc/ZWM_V2/model/models", "sap/m/MessageBox",
+	"com/acc/ZWM_V2/util/formatter"
+], function (Controller, JSONModel, models, MessageBox, formatter) {
 	"use strict";
 
 	return Controller.extend("com.acc.ZWM_V2.controller.workOrderDetail", {
+		formatter: formatter,
 		onInit: function () {
 			this.oModel = this.getOwnerComponent().getModel();
 			this.getOwnerComponent().getRouter().getRoute("workOrderDetail").attachPatternMatched(this.onRouteMatched, this);
@@ -11,6 +13,7 @@ sap.ui.define([
 		onRouteMatched: function (event) {
 			models.references("workOrderDetail", this);
 			if (event.mParameters.arguments) {
+				this.byId("docSubBtnId").setVisible(false);
 				this.byId("iconTabBarId").setSelectedKey("detailTab");
 				this.bindData(event.mParameters.arguments.context);
 				var detailEditNoteData = {
@@ -22,14 +25,16 @@ sap.ui.define([
 					isPhone: sap.ui.Device.system.phone || sap.ui.Device.system.tablet
 				});
 				this.getView().setModel(new JSONModel(detailEditNoteData), "detailEditNoteModel");
+				var index = event.mParameters.arguments.context;
+				var mapsArr = this.MasterRef.getView().getModel("workOrders").getData()[index].NVHEADERTOWOMAP;
+				var url = mapsArr.Url.replace("http", "https");
+				//var url = "http://10.35.20.185:8080/geoeam-au/index.html?id=" + woNum + "&locale=en";
+				//var url = "https://hved.utl.accenture.com/geowm/index.html";
+				var frame = "<div><iframe src=" + url +
+					" width='100%' sandbox='allow-top-navigation allow-scripts allow-forms' height='550px'></iframe></div>";
+				this.byId("mapsId").setContent(frame);
 			}
-			var index = event.mParameters.arguments.context;
-			var woNum = this.MasterRef.getView().getModel("workOrders").getData()[index].Aufnr;
-			var url = "https://10.35.20.185:8080/geoeam-au/index.html?id="+woNum+"&locale=en";
-			//var url = "https://hved.utl.accenture.com/geowm/index.html";
-			var frame = "<div><iframe src=" + url + " width='100%' height='550px'></iframe></div>";
-			this.byId("mapsId").setContent(frame);
-			
+
 		},
 		bindData: function (index) {
 			this.MasterRef = models.getReferences("workOrderMaster");
@@ -249,6 +254,60 @@ sap.ui.define([
 				}
 			});
 
+		},
+		onOperationFinish: function () {
+			if (!this.timeEntryDialog) {
+				this.timeEntryDialog = sap.ui.xmlfragment("com.acc.ZWM_V2.fragments.TimeEntryDialog", this);
+				this.timeEntryDialog.setModel(new JSONModel({}), "timeEntryModel");
+			}
+			var data = this.operDialog.getModel("operationDetailModel").getData();
+			this.timeEntryDialog.getModel("timeEntryModel").setData(data);
+			sap.ui.getCore().byId("timeEntryFId").bindElement("/");
+			this.timeEntryDialog.open();
+		},
+		onTimeEntryCancel: function () {
+			this.timeEntryDialog.close();
+		},
+		handleValueHelp: function (oEvent) {
+			if (!this.absAttTypeDialog) {
+				this.absAttTypeDialog = sap.ui.xmlfragment("com.acc.ZWM_V2.fragments.abs_att_type", this);
+			}
+			this.absAttTypeDialog.open();
+		},
+		onFileUpload: function (oEvent) {
+			var file = oEvent.mParameters.files[0];
+			if (file) {
+				var modelData = this.getView().getModel("WODetModel").getData();
+				modelData.NVHEADERTOATTACHMENTS.results.push(file);
+				this.getView().getModel("WODetModel").refresh();
+			}
+
+		},
+		onDecumentDelete: function (oEvent) {
+			var index = oEvent.oSource.oParent.oParent.indexOfItem(oEvent.oSource.oParent);
+			this.getView().getModel("WODetModel").oData.NVHEADERTOATTACHMENTS.results.splice(index, 1);
+			this.getView().getModel("WODetModel").refresh();
+		},
+		onIconTabBarSelect: function (oEvent) {
+			var key = oEvent.oSource.getSelectedKey();
+			if (key === "documents") {
+				this.byId("docSubBtnId").setVisible(true);
+			} else {
+				this.byId("docSubBtnId").setVisible(false);
+			}
+
+		},
+		onFileUploadByCamera:function(){
+			var options = {
+				quality: 10, 
+				destinationType: navigator.camera.DestinationType.DATA_URL
+			};
+			//myImage.setSrc("data:image/jpeg;base64," + imageData);
+			navigator.camera.getPicture(function(resp){
+				sap.m.MessageToast.show("Success");
+			}, function(error){
+				sap.m.MessageToast.show("Error");
+			}, options);
 		},
 		onCancelOperationsNotes: function (oEvent) {
 			this.operDialog.getModel("operationsNotesData").setProperty("/editBtn", true);
