@@ -104,7 +104,6 @@
 					<IconTabFilter text="Maps">
 						<content height="100%">
 							<core:HTML id="mapsId" content=''>
-								
 							</core:HTML>
 						</content>
 					</IconTabFilter>
